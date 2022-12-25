@@ -1,0 +1,73 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+void traversal_forward(struct Node* head)
+{
+    do{
+        
+       cout<<"Data is: "<<head->data<<endl;
+       head=head->next;
+      
+      }while(head!=NULL);
+      
+     
+}
+void traversal_backward(struct Node* fourth)
+{
+
+    
+    do
+    {
+       cout<<"Data is: "<<fourth->data<<endl;
+        fourth = fourth->prev;
+
+    }while (fourth != NULL);
+}
+
+int main() {
+    
+    //creating nodes -->dynamically 
+    struct Node* head=(struct Node*)malloc(sizeof(struct Node));
+
+    struct Node* second=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* third=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* fourth=(struct Node*)malloc(sizeof(struct Node));
+    
+    //linking nodes
+    
+   
+   
+    head->prev=NULL;
+    head->data=1;
+    head->next=second;
+    
+    second->prev=head;
+    second->data=2;
+    second->next=third;
+    
+    third->prev=second;
+    third->data=3;
+    third->next=fourth;
+    
+    fourth->prev=third;
+    fourth->data=4;
+    fourth->next=NULL;
+    
+    cout<<"In forward:"<<endl;
+    traversal_forward(head);
+    
+    cout<<"In backward:"<<endl;
+    traversal_backward(fourth);
+   
+  
+   
+    return 0;
+}

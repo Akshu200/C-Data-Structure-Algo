@@ -1,0 +1,166 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+void traversal(struct Node* head)
+{
+    struct Node* ptr=head;
+    
+   do
+    {   cout<<"Data is : "<<ptr->data<<endl;
+        ptr=ptr->next;
+    } while(ptr!=head);
+    
+}
+/*void traversal_Prev(struct Node* ptr)
+{
+    while(NULL!=ptr)
+    {
+        cout<<"Data is : "<<ptr->data<<endl;;
+        ptr=ptr->prev;
+    }
+}*/
+
+struct Node* atFirst(struct Node* head,int data)
+{
+    struct Node * ptr=(struct Node*)malloc(sizeof(struct Node));
+    ptr->data=data;
+    
+    struct Node* p=head->next;
+    while(p->next!=head)
+    {
+        p=p->next;
+    }
+    
+    p->next=ptr;
+    ptr->next=head;
+    
+    head=ptr;
+    
+    return head;
+}
+
+struct Node* inBetween(struct Node* head,int data,int index)
+{
+    struct Node* ptr;
+    ptr=(struct Node*)malloc(sizeof(struct Node));
+    ptr->data=data;
+    
+    struct Node* p=head;
+    
+    int i=0;
+    while(i!=index-1)
+    {
+        p=p->next;
+        i++;
+    }
+    
+    struct Node* q=p->next;
+    ptr->next=q;
+    p->next=ptr;
+    
+    return head;
+}
+struct Node* circulardeleteAtFirst(struct Node* head)
+{
+ 
+ struct Node* p,*q;
+ p=head;  q=NULL;
+ 
+ while(p->next!=head)
+ {
+     q=p;
+     p=p->next;
+ }
+ 
+ q->next=head;
+ free(p);
+ return head;
+
+ 
+
+}
+
+struct Node* CLL_inbetween(struct Node* head, int index)
+{
+    struct Node* p=head;
+    struct Node* q=head->next;
+    
+    int i=0;
+    while(i!=index-1)
+    {
+        p=p->next;
+        q=q->next;
+        i++;
+    }
+    p->next=q->next;
+    
+    free(q);
+    return head;
+   
+    
+}
+struct Node* CCL_DELETEatLast(struct Node* head)
+{
+    struct Node* p=head;
+    struct Node* q=head->next;
+    
+    while(q->next!=head)
+    {
+        p=p->next;
+        q=q->next;
+    }
+    
+    p->next=head;
+    free(q);
+    return head;
+  
+ }
+int main() {
+    
+    //creating nodes -->dynamically 
+    struct Node* head=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* second=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* third=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* fourth=(struct Node*)malloc(sizeof(struct Node));
+    
+    //linking nodes
+    
+   // head->prev=NULL;
+    head->data=1;
+    head->next=second;
+    
+   // second->prev=second;
+    second->data=2;
+    second->next=third;
+    
+  //  third->prev=third;
+    third->data=3;
+    third->next=fourth;
+    
+   // fourth->prev=fourth;
+    fourth->data=4;
+    fourth->next=head;
+    
+    cout<<"Before Insertion. "<<endl;
+    traversal(head);
+    
+   // head=atFirst(head, 10);
+   // head=inBetween(head,10,3);
+   
+  // head=circulardeleteAtFirst(head);
+   // head=CLL_inbetween(head,2);
+    head=CCL_DELETEatLast(head);
+    cout<<"After Insertion. "<<endl;
+    traversal(head);
+  
+   
+    return 0;
+}

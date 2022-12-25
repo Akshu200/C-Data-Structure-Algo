@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+
+int BinarySearch(int arr[],int size,int key)
+{
+    int low ,mid,high;
+    low=0;
+    high=size-1;
+    
+//starting sort
+   while(low<=high)
+   { 
+       mid=(low+high)/2;
+   
+       if(arr[mid]==key)
+        {
+            return mid;
+        }
+        if(arr[mid]<key)
+      {
+        low=mid+1;
+      }
+      else
+      {
+        high=mid-1;
+      }
+   }
+   //ending sort
+   return -1;
+}
+
+int main()
+{
+  int arr[]={1,2,3,4,5,6,7,8};
+  int size=8;
+  int key=2;
+  
+int search=BinarySearch(arr,size,key);
+cout<<"found element at index "<<search<<endl;
+cout<<"key is "<<key;
+  return 0;
+}

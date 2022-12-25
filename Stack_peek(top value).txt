@@ -1,0 +1,121 @@
+#include <iostream>
+using namespace std;
+
+//STACK USING ARRAY
+
+struct stack 
+{
+    int size; 
+    int top; 
+    int * arr;
+};
+int isEmpty(struct stack * ptr)
+{
+    if(ptr->top == -1)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+int isFull(struct stack * ptr)
+{   
+    if(ptr->top == ptr->size-1)
+    {
+        return 1;
+    }
+    else 
+    {
+        return 0;
+    }
+    
+}
+
+void push(struct stack * ptr, int value)
+{
+    if(isFull(ptr))
+    {
+        cout<<endl<<"Stack is full, cannot push "<<value<<endl;
+    }
+    else
+    {
+        ptr->top++;
+        
+        ptr->arr[ptr->top]=value;
+        
+        cout<<endl<<"Value push is : "<<value<<endl;
+    }
+}
+
+int pop(struct stack * ptr)
+{
+    if(isEmpty(ptr))
+    {
+        cout<<endl<<"Stack is empty no value to delete."<<endl;
+    }
+    
+    else
+    {
+      int value = ptr->arr[ptr->top];
+        ptr->top --;
+        cout<<endl<<"deleted value : "<<value<<endl;
+        return value;
+    }
+}
+int peek(struct stack * ptr, int i)  // i is position
+{
+    int arrayIndex= ptr->top -i +1;
+    if(arrayIndex <0)
+    {
+        cout<<endl<<"Invalid!! not a specific position"<<endl;
+    }
+    else
+    {
+        return ptr->arr[arrayIndex];
+    }
+}
+int main()
+{
+    struct stack * sp;
+    sp=(struct stack*)malloc(sizeof(struct stack));
+    
+    sp->size=80;
+    sp->top=-1;
+    sp->arr=(int *)malloc(sp->size * sizeof(int));
+    
+    cout<<"before push opertaion,is FULL : "<<isFull(sp);
+    cout<<endl;
+    cout<<"before pop operation , is Empty : "<<isEmpty(sp);
+    
+    push(sp, 11);
+    push(sp, 21);
+    push(sp, 31);
+    push(sp, 41);
+    push(sp, 51);
+    push(sp, 61);
+    push(sp, 71);
+    push(sp, 81);//pushed 8 value,after this no value will enter,stack is full
+    push(sp, 91);
+    
+    pop(sp);
+    pop(sp);
+    pop(sp);
+    cout<<endl;
+    cout<<"after push opertaion,is FULL : "<<isFull(sp);
+    cout<<endl;
+    cout<<"after pop operation ,is Empty : "<<isEmpty(sp);
+    
+    
+    cout<<endl<<"value at top position : "<<peek(sp,1);
+    
+    push(sp, 100);
+    push(sp, 101);
+    push(sp, 102);
+  /*  for(int j=1 ; j< sp->top +1; j++)
+    {
+        cout<<endl<<"index: "<<j<<" value is: "<<peek(sp,j);
+    }*/
+    cout<<endl<<"at top value is "<<peek(sp,7);
+    return 0;
+}

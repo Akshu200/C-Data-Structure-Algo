@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int LinearSearch(int arr[], int size, int key)
+{
+    for(int i=0; i<size; i++)
+    {
+        if(arr[i]==key)
+        {
+            return i;
+        }
+
+    } return -1;
+}
+int main()
+{
+    int arr[]={4,6,3,2,6,9};
+    int size=6;
+    //int size=sizeof(arr)/sizeof(int); //dynamic allocation
+    int key=2;
+    
+    int search=LinearSearch(arr, size,key);
+    
+    //ternary operator
+     (search == -1) ? cout << "Element not found" : cout << "Element found at index: " << search;
+    //cout<<endl<<"Key is "<<key;
+    return 0;
+}

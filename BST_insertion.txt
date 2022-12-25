@@ -1,0 +1,125 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node* left;
+    struct node* right;
+    
+};
+
+struct node* create_node(int data)
+{
+    struct node* n;
+    n=(struct node*)malloc(sizeof(struct node));
+    n->data=data;
+    n->left=NULL;
+    n->right=NULL;
+    return n;
+}
+
+void inOrder(struct node* root)
+{
+    if(root!=NULL)
+    {
+        inOrder(root->left); //recursion
+        cout<<" "<<root->data;
+        inOrder(root->right);//recursion
+    }
+}
+struct node* insertNode(struct node* root, int key)
+{
+    struct node* prev=NULL;
+   
+   while(root!=NULL)
+   {
+    prev=root;
+    if(root->data==key)
+    {
+        cout<<endl<<"KEY is ALready Present in B.S.T, the given key is:"<<key;
+        return 0; 
+    }
+    else if(root->data > key )
+    {
+        root=root->left;
+    }
+    else
+    {
+          root=root->right;
+    }
+  }//while end
+   
+   struct node* newnode=create_node(key);
+   if(key < prev->data)
+   {
+       prev->left=newnode;
+   }
+   else{
+       prev->right=newnode;
+   }
+   
+}
+/*struct node* searchNode(struct node* root, int key)
+{
+   if(root==NULL)
+   {
+       return 0;
+   }
+    if(root->data == key)
+    {
+        return root;
+    }
+    else if(key < root->data)
+    {
+        return searchNode(root->left, key);
+    }
+    else{
+        return searchNode(root->right, key);
+    }
+  
+}*/
+int main() {
+    
+    struct node* p=create_node(5);
+     struct node* p1=create_node(3);
+      struct node* p2=create_node(6);
+       struct node* p3=create_node(1);
+        struct node* p4=create_node(4);
+        
+        //linking of nodes
+        p->left=p1;
+        p->right=p2;
+        p1->left=p3;
+        p1->right=p4;
+        
+    cout<<"Before inSertion In Binary search tree: "<<endl;
+    inOrder(p);
+    insertNode(p,10);
+  //  insertNode(p,10);
+   // cout<<p->right->right->data;
+    
+    cout<<endl<<"After insertion in Binary search tree: "<<endl;
+    inOrder(p);
+    
+   // struct node* s=searchNode(p,4);
+   /* if(s==NULL)
+    {
+         cout<<endl;
+        cout<<"Element Not found !";
+       
+    }
+    else{
+       
+        cout<<endl;
+        cout<<"Element is found : "<<s->data;
+    }*/
+   // (s==NULL)? cout<<endl<<"Element Not found !" : cout<<endl<<"Element is found "<<s->data;
+    // insertNode(p,0);
+     
+     // cout<<endl<<"After insertion in Binary search tree: "<<endl;
+   //  inOrder(p);
+    
+    return 0;
+}

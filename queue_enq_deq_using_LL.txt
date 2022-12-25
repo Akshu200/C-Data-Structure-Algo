@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+
+struct node* f=NULL;
+struct node* r=NULL;
+
+
+struct node 
+{
+    int data;
+    struct node* next;
+};
+
+void enqueue(int value)
+{
+    struct node * n;
+    n=(struct node*)malloc(sizeof(struct node));
+    if(n==NULL)
+    {
+        cout<<endl<<"Queue is FULL"<<endl;
+    }
+    else
+    {
+        n->data=value;
+        n->next=NULL;
+        if(f==NULL)//if queue is empty so front and rear point to new node
+        {
+            f=r=n;
+        }
+        else
+        {
+            r->next=n;
+            r=n;
+        }
+        
+    }
+}
+int dequeue()
+{
+    struct node * ptr=f;
+    if(f==NULL)
+    {
+        cout<<endl<<"Queue is Empty"<<endl;
+    }
+    else
+    {
+        int x=ptr->data;
+       f=f->next; 
+       delete(ptr);
+       return x;
+    }
+}
+void queue(struct node* ptr)
+{
+    while(ptr!=NULL)
+    {
+        cout<<endl<<"data is :"<<ptr->data;
+        ptr=ptr->next;
+    }
+}
+int main()
+{
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    enqueue(4);
+    enqueue(5);
+    
+    queue(f);
+    int ele=dequeue();
+    cout<<endl<<"deleted data is: "<<ele;
+    dequeue();
+    dequeue();
+    queue(f);
+   
+    return 0;
+}

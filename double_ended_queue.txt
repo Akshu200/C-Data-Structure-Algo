@@ -1,0 +1,111 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+struct node* f=NULL;
+struct node* r=NULL;
+
+
+struct node
+{
+    int data;
+    struct node* next;
+};
+void DoubleEnded_queueTraversal(struct node* ptr)
+{
+    while(ptr!=NULL)
+    {
+        cout<<endl<<"Data is : "<<ptr->data;
+        ptr=ptr->next;
+        
+    }
+    
+}
+void enqueueRear(int value)
+{
+    struct node* n;
+    n=(struct node*)malloc(sizeof(struct node));
+    
+    if(n==NULL)
+    {
+        cout<<"Queue is FULL"<<endl;
+    }
+    else
+    {
+        n->data=value;
+        n->next=NULL;
+        if(f==NULL)
+        {
+            f=r=n;
+        }
+        else
+        {
+            r->next=n;
+            r=n;
+        }
+    }
+}
+int dequeueFront()
+{
+    struct node * ptr=f;
+    
+    if(f==NULL)
+    {
+        cout<<"Queue is EMPTY"<<endl; 
+    }
+    else
+    {
+        f=f->next;
+        delete(ptr);
+    }
+}
+/*
+int dequeue()
+{   
+    struct node* i=f;
+    
+    if(r==NULL)
+    {
+        cout<<"Queue is EMPTY"<<endl;  
+    }
+  
+    while(i!= r)
+    {  
+        i=i->next;
+    }
+    struct node * ptr=r;
+    free(ptr);
+     r=i;
+}*/
+void enqueueFront(int valFront)
+{
+    struct node* ptr;
+    ptr=(struct node*)malloc(sizeof(struct node));
+    
+    ptr->data=valFront;
+    ptr->next=f;
+    f=ptr;
+}
+int main() 
+{
+    cout<<endl<<"**enqueueRear***"; 
+  enqueueRear(1);       //insertion from rear
+  enqueueRear(2);
+  enqueueRear(3);
+  enqueueRear(4);
+  enqueueRear(5);
+ 
+  DoubleEnded_queueTraversal(f); 
+   // dequeueFront();   //Deletion form Front
+    cout<<endl<<"**dequeueFront**"; 
+    DoubleEnded_queueTraversal(f); 
+    
+    cout<<endl<<"***********************************";
+  //dequeueFront();   //Deletion form Front
+   
+    enqueueFront(10);
+ DoubleEnded_queueTraversal(f); 
+   
+ 
+    return 0;
+}

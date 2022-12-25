@@ -1,0 +1,77 @@
+#include iostream
+using namespace std;
+
+merge sort
+void PrintArray(int A[], int size)
+{
+    for(int i=0; i<=size; i++)
+    {
+        cout<<A[i] ;
+    }
+}
+void merge(int A[],int low, int mid, int high)
+{
+    int i,j,k,B[100];
+    i=low;  j=mid+1; k=low;           // int A[]={5, 8 , 11 , 1 , 0 , 3}
+				//       here     i     >     j           
+                                / //    i=low, j=mid+1, k=low
+                                 //      ={1, 0, 3 ,5 ,8 ,11} 
+    
+    while(i<=mid && j<=high)
+    {
+        if(A[i]<A[j])        ///i is small then j , then store i value into k
+        {
+            B[k]=A[i];
+            k++; i++;
+        }
+        else
+        {
+            B[k]=A[j];       /// ///j is small then i , then store j value into k
+            k++; j++;
+        }
+    }
+    
+    while(i<=mid)            // storing reamining value of i into k
+    {
+        B[k]=A[i];
+        k++; i++;
+    }
+    
+    while(j<=high)           //// storing reamining value of j into k
+    {
+        B[k]=A[j];
+        k++; j++;
+    }
+    
+    for(int i=low; i<=high; i++)      //copying B[] into A[];
+    {
+        A[i]=B[i];
+    }
+}
+
+void mergeSort(int A[], int low , int high)
+{
+    int mid;
+    if(low<high)
+    {
+       mid=(low+high)2;
+       mergeSort(A,low, mid);
+       mergeSort(A,mid+1, high);
+       merge(A, low , mid , high);
+        
+    }
+}
+int main()
+{
+    int A[]={5,8,11,1,0,3};
+    int size=5;
+    
+    cout<<Before Sorting<<endl;
+    PrintArray(A,size);
+    mergeSort(A,0,5);
+    cout<<endl;
+    cout<<After Sorting<<endl;
+    PrintArray(A,size);
+    
+    return 0;
+}

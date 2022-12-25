@@ -1,0 +1,144 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+struct Node* insertfirst(struct Node* head, int data)
+{
+    struct Node* p=(struct Node*)malloc(sizeof(struct Node));
+    p->next=head;
+    p->data=data;
+    return p;
+}
+struct Node* insertAtbetween(struct Node* head, int data, int index)
+{
+    struct Node* ptr;
+    ptr=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* p=head;
+
+    int i=0;
+    while(i!=index-1)
+    {
+       p=p->next;
+       i++;
+    }
+    ptr->data=data;
+    ptr->next=p->next;
+    p->next=ptr;
+    
+    return head;
+}
+struct Node* insertAtEnd(struct Node* head,int data)
+{
+    struct Node* ptr=(struct Node*)malloc(sizeof(struct Node));
+    ptr->data=data;
+    struct Node* p=head;
+    
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    p->next=ptr;
+    ptr->next=NULL;
+
+    return head;
+    
+}
+void LLtraversal(struct Node* ptr)
+{   
+    while(ptr!=NULL)
+    {
+     cout<<"Element is: "<<ptr->data<<endl;
+     ptr=ptr->next;
+    }
+}
+struct Node* deleteAtFirst(struct Node* head)
+{
+    struct Node* ptr=head;
+    head=head->next;
+    free(ptr);
+    
+    return head;
+}
+struct Node* DeleteINbetween(struct Node* head, int index)
+{
+    struct Node* p=head;
+    int i=0;
+    while(i!=index-1)
+    {
+        p=p->next;
+        i++;
+    }
+    struct Node* q=p->next;
+    p->next=q->next;
+    
+    free(q);
+    
+    return head;
+}
+struct Node* deleteAtLast(struct Node* head)
+{
+    struct Node* p=head;
+    struct Node* q=head->next;
+    
+    while(q->next!=NULL)
+    {
+        p=p->next;
+        q=q->next;
+    }
+    
+    p->next=NULL;
+    free(q);
+    return head;
+}
+int main() {
+    
+    struct Node* head;
+    head=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* second;
+    second=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* third;
+    third=(struct Node*)malloc(sizeof(struct Node));
+    
+    struct Node* fifth;
+    fifth=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* fourth;
+    fourth=(struct Node*)malloc(sizeof(struct Node));
+    
+    head->data=1;
+    head->next=second;
+    
+    second->data=2;
+    second->next=third;
+    
+    third->data=3;
+    third->next=fourth;
+
+    fourth->data=4;
+    fourth->next=fifth;
+    
+    fifth->data=5;
+    fifth->next=NULL;
+    
+   LLtraversal(head);
+   cout<<"Before"<<endl;
+
+   /**INSERTING At First , inBetween & Last*/
+   //head=insertfirst(head,2000);
+   //head=insertAtbetween(head,20,2);
+   // head=insertAtEnd(head,20);
+
+  /*Deleting AT First, In Between & Last*/
+  // head=deleteAtFirst(head);
+  // head=DeleteINbetween(head,1);
+
+   head=deleteAtLast(head);
+   cout<<"After :"<<endl;
+   LLtraversal(head);
+   
+    return 0;
+}
